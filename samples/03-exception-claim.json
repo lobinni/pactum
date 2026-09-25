@@ -1,0 +1,26 @@
+{
+  "label": "Sample exception claim — provider answers a verified miss",
+  "role": "Provider (wallet A) claims within the 1-hour response window",
+  "preconditions": [
+    "Incident status is OPEN (measurement consensus verified the miss)",
+    "The claimed clause is one of the clauses frozen at formation"
+  ],
+  "form_fields": {
+    "exception_clause": "UPSTREAM",
+    "exception_sources": [
+      {
+        "kind": "UPSTREAM_STATUS",
+        "url": "https://status.hostgrid.example.io/incidents/hostgrid-217",
+        "note": "Dependency incident record whose timestamps overlap the measured observation window."
+      }
+    ]
+  },
+  "call_arguments": {
+    "incident_id": "pc-i-1",
+    "exception_code": "UPSTREAM",
+    "exception_evidence_json": [
+      { "kind": "UPSTREAM_STATUS", "url": "https://status.hostgrid.example.io/incidents/hostgrid-217", "note": "Dependency incident record whose timestamps overlap the measured observation window." }
+    ]
+  },
+  "expected_result": "Incident moves to EXCEPTION_CLAIMED, ready for adjudication consensus. A PROVEN result sets liability to 0%; PARTIAL computes liability deterministically from excused intervals; NOT_PROVEN leaves 100%."
+}

@@ -1,0 +1,22 @@
+{
+  "label": "Sample bonded challenge — either party disputes a pending finding",
+  "role": "Provider (wallet A) or Customer (wallet B), inside the frozen challenge window",
+  "preconditions": [
+    "Incident status is PENDING (adjudication produced a decisive finding)",
+    "No challenge exists yet for this incident",
+    "Stake within 0.0001 - 10 GEN"
+  ],
+  "form_fields": {
+    "challenge_statement": "The adjudication attributed the observation to the wrong service incident: the dependency failure ended before the measured window began, so the frozen clause cannot causally cover it.",
+    "evidence_url": "https://journal.example.com/tech/acme-edge-outage-timeline",
+    "bond_gen": "0.001"
+  },
+  "call_arguments": {
+    "incident_id": "pc-i-1",
+    "challenge_text": "The adjudication attributed the observation to the wrong service incident: the dependency failure ended before the measured window began, so the frozen clause cannot causally cover it.",
+    "evidence_url": "https://journal.example.com/tech/acme-edge-outage-timeline",
+    "stake_attached_atto": 1000000000000000
+  },
+  "expected_result": "Challenge OPEN with the stake escrowed. Resolution re-fetches every original source plus this one: UPHELD revises the finding and returns the stake to the challenger; REJECTED awards it to the counterparty; INCONCLUSIVE leaves the pending finding intact.",
+  "alternative_path": "Without a challenge, finalizing after the challenge deadline settles: customer payout = max credit x liability share (capped by the bond), remainder returns to the provider, both as withdrawable credits."
+}

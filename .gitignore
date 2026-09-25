@@ -1,0 +1,11 @@
+node_modules/
+dist/
+__pycache__/
+.pytest_cache/
+.artifacts/
+artifacts/
+.env
+.env.local
+.env.*.local
+*.pyc
+.DS_Store

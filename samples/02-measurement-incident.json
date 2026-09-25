@@ -1,0 +1,37 @@
+{
+  "label": "Sample incident — customer-reported availability miss",
+  "role": "Customer (wallet B) opens on the ACTIVE agreement",
+  "preconditions": [
+    "Agreement is ACTIVE and has no open incident",
+    "Observation window is completed and fully inside the frozen coverage window",
+    "Claimed availability is strictly below the frozen target (9990 bps for the sample pact)"
+  ],
+  "form_fields": {
+    "observed_availability_bps": 9850,
+    "observation_starts": "coverage window start (local date-time)",
+    "observation_ends": "one hour later (local date-time)",
+    "measurement_sources": [
+      {
+        "kind": "INDEPENDENT_PROBE",
+        "url": "https://probe.watchline.example.org/reports/acme-edge/incident-42",
+        "note": "Independent probe export showing 98.50% availability for the exact observation window."
+      },
+      {
+        "kind": "STATUS_AGGREGATOR",
+        "url": "https://statusroll.example.net/services/acme-edge/history",
+        "note": "Third-party status archive corroborating the same incident window."
+      }
+    ]
+  },
+  "call_arguments": {
+    "agreement_id": "pc-a-1",
+    "actual_bps": 9850,
+    "observed_from": "unix seconds of observation start",
+    "observed_to": "unix seconds of observation end",
+    "measurement_evidence_json": [
+      { "kind": "INDEPENDENT_PROBE", "url": "https://probe.watchline.example.org/reports/acme-edge/incident-42", "note": "Independent probe export showing 98.50% availability for the exact observation window." },
+      { "kind": "STATUS_AGGREGATOR", "url": "https://statusroll.example.net/services/acme-edge/history", "note": "Third-party status archive corroborating the same incident window." }
+    ]
+  },
+  "expected_result": "Incident pc-i-1 in MEASUREMENT_PENDING with a frozen measurement case hash, then VERIFIED/NOT_PROVEN/SOURCE_UNAVAILABLE after consensus."
+}

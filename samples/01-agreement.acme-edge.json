@@ -1,0 +1,61 @@
+{
+  "label": "Sample agreement — Acme Edge API availability pact",
+  "role": "Provider (wallet A) signs this; Customer (wallet B) accepts it",
+  "form_fields": {
+    "customer_wallet": "0xCustomerWalletBAddress0000000000000000000",
+    "service_name": "Acme Edge API",
+    "service_url": "https://status.acme-edge.example.com",
+    "metric": "Monthly service availability",
+    "availability_target_percent": "99.90",
+    "maximum_credit_gen": "0.01",
+    "coverage_starts_in_minutes": 1440,
+    "coverage_lasts_minutes": 43200,
+    "challenge_window_minutes": 120,
+    "evidence_policy": "Use only evidence from the frozen origins below. A status notice alone does not establish an exception; evidence must match the named service and the completed observation window. Unavailable or inconclusive evidence never excuses a miss.",
+    "exception_clauses": [
+      {
+        "code": "UPSTREAM",
+        "title": "Upstream infrastructure failure",
+        "rule": "A documented failure of a named hosting dependency materially caused the service impact during the frozen window.",
+        "proof": "Official incident records from the dependency describing start and end times overlapping the observation."
+      }
+    ],
+    "measurement_origins": [
+      { "kind": "INDEPENDENT_PROBE", "host": "probe.watchline.example.org", "path_prefix": "/", "retrieval_mode": "REQUEST_JSON" },
+      { "kind": "STATUS_AGGREGATOR", "host": "statusroll.example.net", "path_prefix": "/", "retrieval_mode": "RENDER_TEXT" }
+    ],
+    "exception_origins": [
+      { "kind": "UPSTREAM_STATUS", "host": "status.hostgrid.example.io", "path_prefix": "/", "retrieval_mode": "REQUEST_TEXT" }
+    ],
+    "challenge_origins": [
+      { "kind": "PUBLIC_SOURCE", "host": "journal.example.com", "path_prefix": "/", "retrieval_mode": "RENDER_TEXT" }
+    ]
+  },
+  "call_arguments": {
+    "note": "What the contract receives when the form above is sealed. target is basis points; amounts are atto-GEN integers; times are Unix seconds.",
+    "customer": "0xCustomerWalletBAddress0000000000000000000",
+    "service_name": "Acme Edge API",
+    "service_url": "https://status.acme-edge.example.com",
+    "metric_name": "Monthly service availability",
+    "target_bps": 9990,
+    "max_credit_atto": 10000000000000000,
+    "window_start": "NOW + 86400",
+    "window_end": "NOW + 86400 + 2592000",
+    "exceptions_json": [{ "code": "UPSTREAM", "title": "Upstream infrastructure failure", "rule": "A documented failure of a named hosting dependency materially caused the service impact during the frozen window.", "proof": "Official incident records from the dependency describing start and end times overlapping the observation." }],
+    "evidence_policy": "Use only evidence from the frozen origins below. A status notice alone does not establish an exception; evidence must match the named service and the completed observation window. Unavailable or inconclusive evidence never excuses a miss.",
+    "source_policy_json": {
+      "measurement": [
+        { "kind": "INDEPENDENT_PROBE", "host": "probe.watchline.example.org", "path_prefix": "/", "retrieval_mode": "REQUEST_JSON" },
+        { "kind": "STATUS_AGGREGATOR", "host": "statusroll.example.net", "path_prefix": "/", "retrieval_mode": "RENDER_TEXT" }
+      ],
+      "exception": [
+        { "kind": "UPSTREAM_STATUS", "host": "status.hostgrid.example.io", "path_prefix": "/", "retrieval_mode": "REQUEST_TEXT" }
+      ],
+      "challenge": [
+        { "kind": "PUBLIC_SOURCE", "host": "journal.example.com", "path_prefix": "/", "retrieval_mode": "RENDER_TEXT" }
+      ]
+    },
+    "challenge_window_seconds": 7200,
+    "bond_attached_atto": 10000000000000000
+  }
+}

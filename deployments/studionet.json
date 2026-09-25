@@ -1,0 +1,56 @@
+{
+  "product": "PACTUM",
+  "network": "studionet",
+  "networkName": "GenLayer Studionet",
+  "chainId": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "explorer": "https://explorer-studio.genlayer.com",
+  "toolchain": {
+    "cli": "0.39.1",
+    "genlayerJs": "1.1.8",
+    "genlayerTest": "0.29.2",
+    "genlayerPy": "0.16.3",
+    "genvmLinter": "0.11.0",
+    "python": "3.12",
+    "node": "22"
+  },
+  "canonicalDeployment": {
+    "version": "1.0.0-studionet",
+    "address": "0x5c0215CCbd74D4270eF1bf3aF17F43C78B3851dc",
+    "transaction": "",
+    "status": "DEPLOYED",
+    "note": "Canonical 1.0.0-studionet release, deployed on GenLayer Studionet 61999. Complete this record with the deployment transaction hash from the deployer wallet history. The production frontend resolves this address from src/lib/config.ts (env VITE_PACTUM_CONTRACT overrides it).",
+    "explorerAddress": "https://explorer-studio.genlayer.com/address/0x5c0215CCbd74D4270eF1bf3aF17F43C78B3851dc",
+    "constructorArgs": [],
+    "deploymentValue": "0",
+    "source": {
+      "path": "contracts/pactum.py",
+      "version": "1.0.0-studionet"
+    },
+    "getStats": {
+      "accounting_balanced": true,
+      "admin_controls": false,
+      "agreement_escrow": "0",
+      "agreements": 0,
+      "chain_id": "61999",
+      "challenge_escrow": "0",
+      "claimable": "0",
+      "finalized_breaches": 0,
+      "incidents": 0,
+      "network": "Studionet",
+      "proven_exceptions": 0,
+      "rpc": "https://studio.genlayer.com/api",
+      "total_deposited": "0",
+      "version": "1.0.0-studionet",
+      "withdrawn": "0"
+    }
+  },
+  "historicalDeployments": [],
+  "productionFrontend": {
+    "url": "",
+    "contractAddress": "0x5c0215CCbd74D4270eF1bf3aF17F43C78B3851dc",
+    "chainId": 61999,
+    "hosting": "Static single-page build (Vite). Deploy on Vercel with env VITE_PACTUM_CONTRACT set to the canonical address; no database, no backend, reads go straight to the Studionet gateway.",
+    "note": "Frontend address selection: VITE_PACTUM_CONTRACT (build env) → src/lib/config.ts PACTUM_CONTRACT fallback. Both must equal canonicalDeployment.address."
+  }
+}
